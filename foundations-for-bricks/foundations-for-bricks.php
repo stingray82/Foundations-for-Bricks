@@ -2,7 +2,7 @@
 /*
 Plugin Name: Foundations for Bricks
 Description: Automatically loads Bricks Builder settings and templates using Bricks' native structure.
-Version: 1.0
+Version: 1.1
 Author: Stingray82
 */
 
@@ -99,7 +99,7 @@ class AutoLoadSettings {
         }
     }
 
-    private function import_bricks_templates() {
+   private function import_bricks_templates() {
         $templates_folder = plugin_dir_path(__FILE__) . 'json/templates/';
 
         if (is_dir($templates_folder)) {
@@ -134,13 +134,16 @@ class AutoLoadSettings {
 
         if ($template_id) {
             error_log("Template imported successfully: {$template_data['title']} (ID: $template_id)");
-            update_post_meta($template_id, 'bricks_page_content', $template_data['content'] ?? '');
-            update_post_meta($template_id, 'bricks_page_settings', $template_data['pageSettings'] ?? []);
-            update_post_meta($template_id, 'bricks_template_settings', $template_data['templateSettings'] ?? []);
+
+            // Save the template content and settings as post meta
+            update_post_meta($template_id, BRICKS_DB_PAGE_CONTENT, $template_data['content'] ?? '');
+            update_post_meta($template_id, BRICKS_DB_PAGE_SETTINGS, $template_data['pageSettings'] ?? []);
+            update_post_meta($template_id, BRICKS_DB_TEMPLATE_SETTINGS, $template_data['templateSettings'] ?? []);
         } else {
             error_log("Failed to import template: {$template_data['title']}");
         }
     }
+
 
     private function deactivate_plugin() {
         error_log('Foundations for Bricks plugin deactivating...');
