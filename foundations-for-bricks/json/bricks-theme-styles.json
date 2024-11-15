@@ -1,0 +1,32 @@
+{
+  "label": "ACSS-Bricks-1.10.x",
+  "settings": {
+    "_custom": "true",
+    "conditions": {
+      "conditions": [
+        {
+          "id": "vuuzri",
+          "main": "any"
+        }
+      ]
+    },
+    "typography": {
+      "typographyHtml": "var(--root-font-size)",
+      "focusOutline": "none"
+    },
+    "container": {
+      "width": "var(--content-width)"
+    },
+    "code": {
+      "prettify": "tomorrow-night"
+    },
+    "image": {
+      "caption": "none"
+    },
+    "heading": {
+      "tag": "h2"
+    },
+    "general": {}
+  },
+  "id": "acss_bricks_1.10.x"
+}
