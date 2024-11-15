@@ -29,8 +29,8 @@ it does the following themes
 This is a plugin designed to be forked and customized for your delivery the
 default version of this installs the settings above and a login template, once a
 community template exists for a style guide I will likely change the example
-template to that  
-  
+template to that
+
 I have designed it to be installed either by a “configuration” or “Bundle” or
 via the CLI i.e the same as my fork of WP TASK on Install, it will once activate
 do its thing and then deactivate itself which means it is then safe to delete
@@ -41,7 +41,7 @@ install for work
 
 A video of Foundations for bricks can be viewed here:
 
- 
+[YouTube Video of Foundations for Bricks](https://youtu.be/CiaPIrW6Y1c)
 
  
 
