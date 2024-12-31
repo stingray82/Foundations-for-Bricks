@@ -2,7 +2,7 @@
 /*
 Plugin Name: Foundations for Bricks
 Description: Automatically loads Bricks Builder settings and templates using Bricks' native structure.
-Version: 1.1
+Version: 1.2
 Author: Stingray82
 */
 
@@ -30,7 +30,9 @@ class AutoLoadSettings {
         $this->import_bricks_global_settings();
         $this->import_bricks_templates();
         $this->set_bricks_code_signatures_admin_notice();
-        $this->deactivate_plugin();
+          // Mark tasks as complete
+        update_option('foundations_bricks_tasks_complete', true);
+      
     }
 
     private function is_bricks_installed() {
@@ -168,3 +170,28 @@ class AutoLoadSettings {
 }
 
 new AutoLoadSettings();
+
+function rup_deploy_deactivate_and_delete_this_plugin_FFB() {
+    // Check if all tasks are complete
+    if (get_option('foundations_bricks_tasks_complete', false)) {
+        // Ensure the required functions are available
+        if (!function_exists('deactivate_plugins')) {
+            require_once ABSPATH . '/wp-admin/includes/plugin.php';
+        }
+
+        // Deactivate the plugin
+        deactivate_plugins(plugin_basename(__FILE__));
+        error_log('Plugin deactivated: ' . plugin_basename(__FILE__));
+
+        // Delete the plugin
+        $plugin_file = plugin_basename(__FILE__);
+        if (delete_plugins([$plugin_file])) {
+            error_log('Plugin deleted: ' . $plugin_file);
+        } else {
+            error_log('Failed to delete plugin: ' . $plugin_file);
+        }
+    } else {
+        error_log('Tasks not complete. Plugin deletion skipped.');
+    }
+}
+add_action('admin_init', 'rup_deploy_deactivate_and_delete_this_plugin_FFB');
