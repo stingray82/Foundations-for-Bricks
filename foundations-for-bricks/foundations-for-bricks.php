@@ -1,10 +1,19 @@
 <?php
-/*
-Plugin Name: Foundations for Bricks
-Description: Automatically loads Bricks Builder settings and templates using Bricks' native structure.
-Version: 1.21
-Author: Stingray82
-*/
+/**
+ * Plugin Name:       Foundations for Bricks
+ * Tested up to:      6.7.2
+ * Description:       Automatically loads Bricks Builder settings and templates using Bricks' native structure
+ * Requires at least: 6.5
+ * Requires PHP:      7.4
+ * Version:           1.21
+ * Author:            reallyusefulplugins.com
+ * Author URI:        https://reallyusefulplugins.com
+ * License:           GPL-2.0-or-later
+ * License URI:       https://www.gnu.org/licenses/gpl-2.0.html
+ * Text Domain:       foundations-for-bricks
+ * Website:           https://reallyusefulplugins.com
+ * */
+
 
 if (!defined('ABSPATH')) {
     exit; // Exit if accessed directly
