@@ -1,11 +1,11 @@
 <?php
 /**
  * Plugin Name:       Foundations for Bricks
- * Tested up to:      6.7.2
+ * Tested up to:      6.8.1
  * Description:       Automatically loads Bricks Builder settings and templates using Bricks' native structure
  * Requires at least: 6.5
  * Requires PHP:      7.4
- * Version:           1.21
+ * Version:           1.3
  * Author:            reallyusefulplugins.com
  * Author URI:        https://reallyusefulplugins.com
  * License:           GPL-2.0-or-later
@@ -13,6 +13,7 @@
  * Text Domain:       foundations-for-bricks
  * Website:           https://reallyusefulplugins.com
  * */
+
 
 
 if (!defined('ABSPATH')) {
@@ -24,6 +25,7 @@ class FoundationsForBricks {
     public function __construct() {
         add_action('admin_init', [$this, 'run_tasks']);
         add_action('admin_init', [$this, 'deactivate_and_delete_plugin']);
+        add_action('init', [$this, 'enable_code_execution_for_admins']); // Enable Bricks code execution for admins
     }
 
     public function run_tasks() {
@@ -44,6 +46,25 @@ class FoundationsForBricks {
 
         // Mark tasks as complete
         update_option('foundations_bricks_tasks_complete', true);
+    }
+
+    /**
+     * Enable Bricks code execution for administrator role.
+     */
+    public function enable_code_execution_for_admins() {
+        //Enable code execution for admin role
+        $role = get_role('administrator');
+        if ($role && !$role->has_cap('bricks_execute_code')) {
+            $role->add_cap('bricks_execute_code');
+        }
+
+        // Uncomment below to give individual user(s) code execution capability
+        /*
+        $user = get_user_by('ID', 1); // Replace 1 with the user ID
+        if ($user && !$user->has_cap('bricks_execute_code')) {
+            $user->add_cap('bricks_execute_code');
+        }
+        */
     }
 
     private function is_bricks_installed() {
